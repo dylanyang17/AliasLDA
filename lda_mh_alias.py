@@ -220,7 +220,7 @@ class Lda_MH_Alias:
             self.title = pickle.load(f)
             f.close()
 
-    def load_data_formal(self, filename='data/docword.enron.txt/docword.enron.txt'):
+    def load_data_formal(self, filename='data/docword.enron.txt/docword.enron.txt', percentage=1):
         """Load the training data.
         :param
         filename:String
@@ -248,6 +248,7 @@ class Lda_MH_Alias:
             self.voc_num = int(f.readline())
             self.word_num = int(f.readline())
             self.vocabulary = range(0, self.voc_num)
+	    # TODO: 离散化?
             for line in f:
                 items = list(map(int, line.strip().split(' ')))
                 self.words.extend([items[1]-1] * items[2])
@@ -400,7 +401,7 @@ class Lda_MH_Alias:
             f.write('\n')
         f.close()
 
-    def train(self, reuse_num, topic_num=1024, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1):
+    def train(self, reuse_num, topic_num=1024, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1, seed=2019):
         """Train a lda model based on the given parameters. The training process
         is based on Metropolis-Hasting-alias sampling technique. The last several iterations( the
         sampling is believed to be converged in these iterations) of the
@@ -435,8 +436,7 @@ class Lda_MH_Alias:
         log_likelihood: array, float
             The log_likelihood of the topic model at every 10 iterations.
          """
-
-        random.seed(2019)  # fix the seed.
+	random.seed(seed)  # fix the seed.
         # Initiate the parameters of training model
         self.topic_num = topic_num
         self.reuse_num = reuse_num
@@ -574,7 +574,7 @@ class Lda_MH_Alias:
             The minimum number of topic.
 
         end: int, (default = 6)
-            The maximum number of topic.
+            The maximu number of topic.
 
         Returns
         ----------
@@ -583,7 +583,10 @@ class Lda_MH_Alias:
         self.load_data_formal()
         for i in reuse_list:
             print('training model with %d reuse times' % i)
-            p = 'alias_' + str(i)
+	    p = 'alias_' + str(i)
+            path = os.path.join('train', 'mat_10percent_seed' + str(seed), p)
+	    if not os.path.exists(path):
+	        os.makedirs(path)
             t, log_likelihood = self.train(reuse_num=i)
             self.save_model('models/alias_' + str(i) + '_model')
             data = {p + '_time': t, p + '_like': log_likelihood}
@@ -592,4 +595,5 @@ class Lda_MH_Alias:
 
 # The topic num is fixed to 1024
 model = Lda_MH_Alias()
-model.run([128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072])
+# model.run([128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072])
+model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
