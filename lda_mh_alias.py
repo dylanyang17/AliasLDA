@@ -8,7 +8,6 @@ import time
 import matplotlib.pyplot as plt
 import scipy.io as sio
 
-
 class SortedSparseHistogram:
     """
         This object is used to store and
@@ -144,17 +143,17 @@ class Lda_MH_Alias:
         ----------
         None
          """
-        self.reuse_num = 0    # 复用次数
-        self.topic_num = 0    # 主题数目
-        self.alpha = []       # 文档-主题的Dirichlet参数
-        self.beta = []        # 主题-单词的Dirichlet参数
-        self.words = []       # 所有的单词，以标号形式表示
-        self.docs = []        # 每个单词对应的文档的标号
+        self.reuse_num = 0  # 复用次数
+        self.topic_num = 0  # 主题数目
+        self.alpha = []  # 文档-主题的Dirichlet参数
+        self.beta = []  # 主题-单词的Dirichlet参数
+        self.words = []  # 所有的单词，以标号形式表示
+        self.docs = []  # 每个单词对应的文档的标号
         self.vocabulary = []  # 标号对应的单词字符串
-        self.topics = []      # 每个单词对应的主题的标号
-        self.doc_num = 0      # 总文档数
-        self.word_num = 0     # 总单词数（重复出现计多次）
-        self.voc_num = 0      # 总词汇数（重复出现计一次）
+        self.topics = []  # 每个单词对应的主题的标号
+        self.doc_num = 0  # 总文档数
+        self.word_num = 0  # 总单词数（重复出现计多次）
+        self.voc_num = 0  # 总词汇数（重复出现计一次）
         self.theta = []
         self.phi = []
         self.title = []
@@ -201,7 +200,7 @@ class Lda_MH_Alias:
         None
          """
         if not os.path.exists(filename):
-            print('Model file does not exist!')
+            debug('Model file does not exist!')
         else:
             f = open(filename, 'rb')
             self.reuse_num = pickle.load(f)
@@ -220,11 +219,13 @@ class Lda_MH_Alias:
             self.title = pickle.load(f)
             f.close()
 
-    def load_data_formal(self, filename='data/docword.enron.txt/docword.enron.txt', percentage=1):
+    def load_data_formal(self, filename, percentage):
         """Load the training data.
         :param
-        filename:String
+        filename: String
             the file path of the training data.
+        percentage: int
+            the percentage of original data to be used. Note that the percentage needs to be divided by 100.
 
         :return:
         None
@@ -244,16 +245,29 @@ class Lda_MH_Alias:
             self.words = []
             self.docs = []
             self.title = []
+            self.vocabulary = []
             self.doc_num = int(f.readline())
-            self.voc_num = int(f.readline())
-            self.word_num = int(f.readline())
-            self.vocabulary = range(0, self.voc_num)
-	    # TODO: 离散化?
+            _ = f.readline()
+            _ = f.readline()
+            self.voc_num = 0
+            self.word_num = 0
+            # self.vocabulary = range(0, self.voc_num)
+            self.doc_num = int(self.doc_num * percentage / 100)
             for line in f:
                 items = list(map(int, line.strip().split(' ')))
-                self.words.extend([items[1]-1] * items[2])
-                self.docs.extend([items[0]-1] * items[2])
-            print('Document number:\t' + str(self.doc_num) + '\tWord number:\t' + str(
+                if items[0] > self.doc_num:
+                    break
+                doc = items[0] - 1
+                word = items[1] - 1
+                if word not in self.vocabulary:
+                    self.vocabulary.append(word)
+                    self.words.extend([len(self.vocabulary) - 1] * items[2])
+                else:
+                    self.words.extend([self.vocabulary.index(word)] * items[2])
+                self.word_num += items[2]
+                self.docs.extend([doc] * items[2])
+            self.voc_num = len(self.vocabulary)
+            debug('Document number:\t' + str(self.doc_num) + '\tWord number:\t' + str(
                 self.word_num) + '\tVocabulary number:\t' + str(self.voc_num))
 
     def load_data(self, filename='data'):
@@ -303,7 +317,7 @@ class Lda_MH_Alias:
         self.voc_num = len(self.vocabulary)
         self.doc_num = doc_id
         self.word_num = count
-        print('Document number:\t' + str(self.doc_num) + '\tWord number:\t' + str(
+        debug('Document number:\t' + str(self.doc_num) + '\tWord number:\t' + str(
             self.word_num) + '\tVocabulary number:\t' + str(self.voc_num))
         f.close()
 
@@ -326,7 +340,7 @@ class Lda_MH_Alias:
             doc_id = self.docs[i]
             word_id = self.words[i]
             log_likelihood += math.log(prob[doc_id, word_id])
-        print('\tLog likelihood:\t' + str(log_likelihood))
+        debug('\tLog likelihood:\t' + str(log_likelihood))
         return log_likelihood
 
     def sample(self, p):
@@ -401,7 +415,7 @@ class Lda_MH_Alias:
             f.write('\n')
         f.close()
 
-    def train(self, reuse_num, topic_num=1024, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1, seed=2019):
+    def train(self, reuse_num, topic_num=1024, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1):
         """Train a lda model based on the given parameters. The training process
         is based on Metropolis-Hasting-alias sampling technique. The last several iterations( the
         sampling is believed to be converged in these iterations) of the
@@ -436,7 +450,6 @@ class Lda_MH_Alias:
         log_likelihood: array, float
             The log_likelihood of the topic model at every 10 iterations.
          """
-	random.seed(seed)  # fix the seed.
         # Initiate the parameters of training model
         self.topic_num = topic_num
         self.reuse_num = reuse_num
@@ -529,7 +542,7 @@ class Lda_MH_Alias:
 
             t2 = time.process_time()
             t.append(t2 - t1)
-            print('iteration %d: consumed %.2f' % (iter_num, t[-1]))
+            debug('iteration %d: consumed %.2f' % (iter_num, t[-1]))
             if iter_num % 1 == 0:
                 phi = np.zeros((self.topic_num, self.voc_num))
                 theta = np.zeros((self.doc_num, self.topic_num))
@@ -563,7 +576,7 @@ class Lda_MH_Alias:
 
         return t, log_likelihood
 
-    def run(self, reuse_list):
+    def run(self, reuse_list, percentage, seed):
         """Run the training of a series of lda models with different numbers of reuse.
         The performance of each lda model is evaluated with log likelihood and
         consumed time. The results are stored in a mat file.
@@ -580,20 +593,36 @@ class Lda_MH_Alias:
         ----------
         None
         """
-        self.load_data_formal()
+        train_dir = os.path.join('train', 'mat_%dpercent_%dseed' % (percentage, seed))
+        if not os.path.exists(train_dir):
+            os.makedirs(train_dir)
+        log_dir = os.path.join(train_dir, 'log')
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+        global log_path
+        log_path = os.path.join(log_dir, 'settings.txt')
+        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=10)
         for i in reuse_list:
-            print('training model with %d reuse times' % i)
-	    p = 'alias_' + str(i)
-            path = os.path.join('train', 'mat_10percent_seed' + str(seed), p)
-	    if not os.path.exists(path):
-	        os.makedirs(path)
+            random.seed(seed)  # fix the seed.
+            debug('training model with %d reuse times' % i)
+            p = 'alias_' + str(i)
+            log_path = os.path.join(log_dir, 'log_' + p + '.txt')
+            path = os.path.join(train_dir, p)
             t, log_likelihood = self.train(reuse_num=i)
             self.save_model('models/alias_' + str(i) + '_model')
             data = {p + '_time': t, p + '_like': log_likelihood}
-            sio.savemat(p, data)
+            sio.savemat(path, data)
 
+log_path = ''
 
+def debug(s):
+    global log_path
+    print(s)
+    with open(log_path, 'a') as f:
+        print(s, file=f)
+
+# 注意percentage必须是整数
 # The topic num is fixed to 1024
 model = Lda_MH_Alias()
-# model.run([128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768, 65536, 131072])
-model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
+model.run([128, 256, 512, 1024, 2048, 4096, 8192, 16384, 32768], percentage=10, seed=2019)
+# model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
