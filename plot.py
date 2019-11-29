@@ -3,9 +3,10 @@ import os
 import scipy.io as sio
 from matplotlib import pyplot as plt
 
-mat_path = 'mat/'
+mat_path = os.path.join('train', 'mat_10percent_2019seed')
 # mat_name = ['alias_724', 'alias_824', 'alias_924', 'alias_1024', 'alias_1124', 'alias_1224', 'alias_1324', 'alias_1424']
-mat_name = ['alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_128', 'alias_256', 'alias_512', 'alias_724','alias_824', 'alias_1024', 'alias_2048', 'alias_4096']
+# mat_name = ['alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_128', 'alias_256', 'alias_512', 'alias_724','alias_824', 'alias_1024', 'alias_2048', 'alias_4096']
+mat_name = ['alias_128', 'alias_256', 'alias_512', 'alias_1024', 'alias_2048', 'alias_4096', 'alias_8192', 'alias_16384', 'alias_32768']
 # 'alias_8192', 'alias_16384', 'alias_32768', 'alias_65536', 'alias_131072']
 for name in mat_name:
     path = os.path.join(mat_path, name)
