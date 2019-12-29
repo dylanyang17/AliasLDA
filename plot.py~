@@ -3,13 +3,35 @@ import os
 import scipy.io as sio
 from matplotlib import pyplot as plt
 
-mat_path = os.path.join('train', 'mat_10percent_2019seed')
+def filter_alias(name):
+    if not name.startswith('alias'):
+        return False
+    else:
+        return True
+
+def get_prefix(name):
+    return name[:name.find('.')]
+
+def get_reuse_times(name):
+    return int(name[name.find('_') + 1:])
+
+mat_path = os.path.join('train', 'mat_percent10_topic1024_seed8347')
 # mat_name = ['alias_724', 'alias_824', 'alias_924', 'alias_1024', 'alias_1124', 'alias_1224', 'alias_1324', 'alias_1424']
 # mat_name = ['alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_128', 'alias_256', 'alias_512', 'alias_724','alias_824', 'alias_1024', 'alias_2048', 'alias_4096']
-mat_name = ['alias_4', 'alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_88', 'alias_98', 'alias_108', 'alias_118', 'alias_123',
-            'alias_128', 'alias_133', 'alias_138', 'alias_148', 'alias_158', 'alias_256', 'alias_512', 'alias_1024', 'alias_2048',
-            'alias_4096', 'alias_8192', 'alias_16384', 'alias_32768']
+# mat_name = ['alias_4', 'alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_88', 'alias_98', 'alias_108', 'alias_118', 'alias_123',
+#            'alias_128', 'alias_133', 'alias_138', 'alias_148', 'alias_158', 'alias_256', 'alias_512', 'alias_1024', 'alias_2048',
+#            'alias_4096', 'alias_8192', 'alias_16384', 'alias_32768']
 # 'alias_8192', 'alias_16384', 'alias_32768', 'alias_65536', 'alias_131072']
+mat_name = []
+
+
+if mat_name == []:
+    mat_name = os.listdir(mat_path)
+    mat_name = filter(filter_alias, mat_name)
+    mat_name = list(map(get_prefix, mat_name))
+    mat_name.sort(key=get_reuse_times)
+    print(mat_name)
+
 
 reuse_times_list = []
 wall_time_list = []

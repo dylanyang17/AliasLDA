@@ -7,6 +7,7 @@ import os
 import time
 import matplotlib.pyplot as plt
 import scipy.io as sio
+from hyperopt import fmin, tpe, hp
 
 class SortedSparseHistogram:
     """
@@ -415,7 +416,7 @@ class Lda_MH_Alias:
             f.write('\n')
         f.close()
 
-    def train(self, reuse_num, topic_num=1024, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1):
+    def train(self, reuse_num, topic_num, max_iter_num=100, valid_sample_num=10, alpha=0.01, beta=0.1, threshold=-1):
         """Train a lda model based on the given parameters. The training process
         is based on Metropolis-Hasting-alias sampling technique. The last several iterations( the
         sampling is believed to be converged in these iterations) of the
@@ -442,6 +443,10 @@ class Lda_MH_Alias:
 
         beta: float, (default = 0.1)
             The hyper parameters of the dirichlet distribution of topic-word model.
+
+        threshold: float, (default = -1)
+            If threshold is not -1, the training process will stop once the loss value is
+            greater than threshold.
         Returns
         ----------
         t: array, float
@@ -559,6 +564,8 @@ class Lda_MH_Alias:
 
                 like = self.cal_log_likelihood(phi, theta)
                 log_likelihood.append(like)
+                if threshold != -1 and like >= threshold:
+                    break
 
         #         if iter_num>valid_thresh:
         #             sample_topic_word_count += topic_word_count
@@ -576,7 +583,32 @@ class Lda_MH_Alias:
 
         return t, log_likelihood
 
-    def run(self, reuse_list, percentage, seed):
+    def get_wallclock(self, args):
+        """
+        对于单个复用次数进行测试
+        :param reuse_num: 复用次数
+        :param seed: 种子
+        :param topic_num: 主题数
+        :param threshold: 阈值，loss超过该阈值则截断
+        :param log_dir: log文件存放目录
+        :param train_dir: 训练文件存放目录
+        :return: 返回 loss 值到达 threshold 所需时间
+        """
+        reuse_num, seed, topic_num, threshold, log_dir, train_dir = args
+        random.seed(seed)
+        debug('get_wallclock with %d reuse times' % reuse_num)
+        p = 'alias_' + str(reuse_num)
+        global log_path
+        log_path = os.path.join(log_dir, 'log_' + p + '.txt')
+        path = os.path.join(train_dir, p)
+        t, log_likelihood = self.train(reuse_num=reuse_num, topic_num=topic_num, threshold=threshold)
+        # self.save_model('models/alias_' + str(reuse_num) + '_model')
+        data = {p + '_time': t, p + '_like': log_likelihood}
+        sio.savemat(path, data)
+        return sum(t)
+
+
+    def run(self, reuse_list, percentage, seed, topic_num):
         """Run the training of a series of lda models with different numbers of reuse.
         The performance of each lda model is evaluated with log likelihood and
         consumed time. The results are stored in a mat file.
@@ -593,7 +625,7 @@ class Lda_MH_Alias:
         ----------
         None
         """
-        train_dir = os.path.join('train', 'mat_%dpercent_%dseed' % (percentage, seed))
+        train_dir = os.path.join('train', 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
         if not os.path.exists(train_dir):
             os.makedirs(train_dir)
         log_dir = os.path.join(train_dir, 'log')
@@ -608,10 +640,35 @@ class Lda_MH_Alias:
             p = 'alias_' + str(i)
             log_path = os.path.join(log_dir, 'log_' + p + '.txt')
             path = os.path.join(train_dir, p)
-            t, log_likelihood = self.train(reuse_num=i)
+            t, log_likelihood = self.train(reuse_num=i, topic_num=topic_num)
             self.save_model('models/alias_' + str(i) + '_model')
             data = {p + '_time': t, p + '_like': log_likelihood}
             sio.savemat(path, data)
+
+    def run_auto(self, percentage, seed, topic_num, threshold):
+        """
+        Run model without reuse_list, but with the selection algorithm Auto-WEKA with TPE.
+        :param percentage: 只使用数据的percentage%部分
+        :param seed: 用于固定随机种子
+        :param topic_num: 主题数
+        :param threshold: 阈值，用于计算wallclock——训练直到损失值大于wallclock所需时间
+        :return: 
+        """
+        train_dir = os.path.join('train', 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
+        if not os.path.exists(train_dir):
+            os.makedirs(train_dir)
+        log_dir = os.path.join(train_dir, 'log')
+        if not os.path.exists(log_dir):
+            os.makedirs(log_dir)
+        global log_path
+        log_path = os.path.join(log_dir, 'settings.txt')
+        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=10)
+        best = fmin(fn=self.get_wallclock,
+                    space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
+                           log_dir, train_dir],  # TODO: loguniform
+                    algo=tpe.suggest,
+                    max_evals=3)
+        #reuse_num, seed, topic_num, threshold, log_dir, train_dir
 
 log_path = ''
 
@@ -622,7 +679,10 @@ def debug(s):
         print(s, file=f)
 
 # 注意percentage必须是整数
-# The topic num is fixed to 1024
 model = Lda_MH_Alias()
+# model.run([8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192], percentage=10, seed=2019, topic_num=256)
 # model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
+
+# TODO: pay attention to the threshold.
+model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000)
