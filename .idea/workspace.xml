@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="83bcb892-2a4f-423a-8bef-613cb34439de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.lda_mh_alias.py.swp" beforeDir="false" afterPath="$PROJECT_DIR$/.lda_mh_alias.py.swp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lda_mh_alias.py" beforeDir="false" afterPath="$PROJECT_DIR$/lda_mh_alias.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_hyperopt.py" beforeDir="false" afterPath="$PROJECT_DIR$/test_hyperopt.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/log/settings.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -42,7 +42,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.lda_mh_alias">
+  <component name="RunManager" selected="Python.test_hyperopt">
     <configuration name="lda_mh_alias" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="采样复杂度优化" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -129,9 +129,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test_hyperopt" />
         <item itemvalue="Python.lda_mh_alias" />
         <item itemvalue="Python.plot" />
-        <item itemvalue="Python.test_hyperopt" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
@@ -161,5 +161,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="PythonConfigurationType">
+        <watch expression="q" language="Python" />
+      </configuration>
+    </watches-manager>
   </component>
 </project>

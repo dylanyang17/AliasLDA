@@ -7,7 +7,7 @@ import os
 import time
 import matplotlib.pyplot as plt
 import scipy.io as sio
-from hyperopt import fmin, tpe, hp
+from hyperopt import fmin, tpe, hp, Trials
 
 class SortedSparseHistogram:
     """
@@ -653,7 +653,7 @@ class Lda_MH_Alias:
             data = {p + '_time': t, p + '_like': log_likelihood}
             sio.savemat(path, data)
 
-    def run_auto(self, percentage, seed, topic_num, threshold, repeat_times):
+    def run_auto(self, percentage, seed, topic_num, threshold, repeat_times, max_evals):
         """
         Run model without reuse_list, but with the selection algorithm Auto-WEKA with TPE.
         :param percentage: 只使用数据的percentage%部分
@@ -661,6 +661,7 @@ class Lda_MH_Alias:
         :param topic_num: 主题数
         :param threshold: 阈值，用于计算wallclock——训练直到损失值大于wallclock所需时间
         :param repeat_times: 对于每一个复用次数，重复进行的测试次数
+        :param max_evals: 最大迭代次数
         :return: 
         """
         train_dir = os.path.join('train', 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
@@ -672,12 +673,16 @@ class Lda_MH_Alias:
         global log_path
         log_path = os.path.join(log_dir, 'settings.txt')
         self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
+        trials = Trials()
         best = fmin(fn=self.get_wallclock,
                     space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
                            log_dir, train_dir, repeat_times],  # TODO: loguniform
                     algo=tpe.suggest,
-                    max_evals=3)
+                    max_evals=max_evals,
+                    trials=trials)
         #reuse_num, seed, topic_num, threshold, log_dir, train_dir
+        with open(os.path.join(train_dir, 'trials.pk'), 'wb') as f:
+            pickle.dump(trials, f)
 
 log_path = ''
 
@@ -694,4 +699,4 @@ model = Lda_MH_Alias()
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
 # TODO: pay attention to the threshold.
-model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3)
+model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=30)
