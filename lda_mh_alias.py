@@ -585,27 +585,35 @@ class Lda_MH_Alias:
 
     def get_wallclock(self, args):
         """
-        对于单个复用次数进行测试
+        对于单个复用次数进行测试，用于 run_auto
         :param reuse_num: 复用次数
         :param seed: 种子
         :param topic_num: 主题数
         :param threshold: 阈值，loss超过该阈值则截断
         :param log_dir: log文件存放目录
         :param train_dir: 训练文件存放目录
-        :return: 返回 loss 值到达 threshold 所需时间
+        :param repeat_times: 重复次数，第 i 次用的种子为 seed + i*i
+        :return: 返回在 repeat_times 次测试中， loss 值到达 threshold 所需的平均时间
         """
-        reuse_num, seed, topic_num, threshold, log_dir, train_dir = args
-        random.seed(seed)
+        reuse_num, seed, topic_num, threshold, log_dir, train_dir, repeat_times = args
+        reuse_num = int(reuse_num)
+        topic_num = int(topic_num)
+        repeat_times = int(repeat_times)
         debug('get_wallclock with %d reuse times' % reuse_num)
         p = 'alias_' + str(reuse_num)
         global log_path
         log_path = os.path.join(log_dir, 'log_' + p + '.txt')
         path = os.path.join(train_dir, p)
-        t, log_likelihood = self.train(reuse_num=reuse_num, topic_num=topic_num, threshold=threshold)
+        log_likelihood = None
+        ret = 0
+        for i in range(repeat_times):
+            random.seed(seed + i * i)
+            t, l = self.train(reuse_num=reuse_num, topic_num=topic_num, threshold=threshold)
+            ret += sum(t)
         # self.save_model('models/alias_' + str(reuse_num) + '_model')
         data = {p + '_time': t, p + '_like': log_likelihood}
-        sio.savemat(path, data)
-        return sum(t)
+        # sio.savemat(path, data) 在这里不存储log_likelihood的训练过程
+        return ret/repeat_times
 
 
     def run(self, reuse_list, percentage, seed, topic_num):
@@ -633,7 +641,7 @@ class Lda_MH_Alias:
             os.makedirs(log_dir)
         global log_path
         log_path = os.path.join(log_dir, 'settings.txt')
-        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=10)
+        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
         for i in reuse_list:
             random.seed(seed)  # fix the seed.
             debug('training model with %d reuse times' % i)
@@ -645,13 +653,14 @@ class Lda_MH_Alias:
             data = {p + '_time': t, p + '_like': log_likelihood}
             sio.savemat(path, data)
 
-    def run_auto(self, percentage, seed, topic_num, threshold):
+    def run_auto(self, percentage, seed, topic_num, threshold, repeat_times):
         """
         Run model without reuse_list, but with the selection algorithm Auto-WEKA with TPE.
         :param percentage: 只使用数据的percentage%部分
         :param seed: 用于固定随机种子
         :param topic_num: 主题数
         :param threshold: 阈值，用于计算wallclock——训练直到损失值大于wallclock所需时间
+        :param repeat_times: 对于每一个复用次数，重复进行的测试次数
         :return: 
         """
         train_dir = os.path.join('train', 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
@@ -662,10 +671,10 @@ class Lda_MH_Alias:
             os.makedirs(log_dir)
         global log_path
         log_path = os.path.join(log_dir, 'settings.txt')
-        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=10)
+        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
         best = fmin(fn=self.get_wallclock,
                     space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
-                           log_dir, train_dir],  # TODO: loguniform
+                           log_dir, train_dir, repeat_times],  # TODO: loguniform
                     algo=tpe.suggest,
                     max_evals=3)
         #reuse_num, seed, topic_num, threshold, log_dir, train_dir
@@ -685,4 +694,4 @@ model = Lda_MH_Alias()
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
 # TODO: pay attention to the threshold.
-model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000)
+model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3)
