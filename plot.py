@@ -96,6 +96,7 @@ def plot_tpe():
     for pk_dir in pk_dirs:
         with open(os.path.join(pk_dir, 'trials.pk'), 'rb') as f:
             trials = pickle.load(f)
+
             reuse_times_list = trials.idxs_vals[1]['reuse']
             wall_time_list = list(map(lambda x: x['loss'], trials.results))
             data = list(zip(reuse_times_list, wall_time_list))

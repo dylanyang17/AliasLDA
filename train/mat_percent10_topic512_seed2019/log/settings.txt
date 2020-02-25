@@ -1,2 +1,4 @@
 Document number:	3986	Word number:	390074	Vocabulary number:	17524
 get_wallclock with 1910 reuse times
+Document number:	3986	Word number:	390074	Vocabulary number:	17524
+get_wallclock with 4067 reuse times
