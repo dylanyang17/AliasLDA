@@ -675,8 +675,10 @@ class Lda_MH_Alias:
         self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
         trials = Trials()
         best = fmin(fn=self.get_wallclock,
-                    space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
-                           log_dir, train_dir, repeat_times],  # TODO: loguniform
+                    #space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
+                    #       log_dir, train_dir, repeat_times],  # TODO: qloguniform
+                    space=[hp.qloguniform('reuse', math.log(16), math.log(4096), 1), seed, topic_num, threshold,
+                           log_dir, train_dir, repeat_times],  # TODO: qloguniform
                     algo=tpe.suggest,
                     max_evals=max_evals,
                     trials=trials)
@@ -699,4 +701,4 @@ model = Lda_MH_Alias()
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
 # TODO: pay attention to the threshold.
-model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=30)
+model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=40)
