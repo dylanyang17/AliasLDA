@@ -92,7 +92,7 @@ def plot_tpe():
     """
     TPE 的 plot, 用于读入 trials.pk, 绘制walltime-复用次数图像
     """
-    pk_dirs = [os.path.join('train', 'mat_percent10_topic128_seed2019')]
+    pk_dirs = [os.path.join('train', 'mat_percent10_topic256_seed2019')]
     for pk_dir in pk_dirs:
         with open(os.path.join(pk_dir, 'trials.pk'), 'rb') as f:
             trials = pickle.load(f)

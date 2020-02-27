@@ -678,7 +678,7 @@ class Lda_MH_Alias:
                     #space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
                     #       log_dir, train_dir, repeat_times],  # TODO: qloguniform
                     space=[hp.qloguniform('reuse', math.log(16), math.log(4096), 1), seed, topic_num, threshold,
-                           log_dir, train_dir, repeat_times],  # TODO: qloguniform
+                           log_dir, train_dir, repeat_times],
                     algo=tpe.suggest,
                     max_evals=max_evals,
                     trials=trials)
