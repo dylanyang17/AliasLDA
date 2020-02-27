@@ -8,6 +8,7 @@ import time
 import matplotlib.pyplot as plt
 import scipy.io as sio
 from hyperopt import fmin, tpe, hp, Trials
+import hyperopt
 
 class SortedSparseHistogram:
     """
@@ -593,7 +594,8 @@ class Lda_MH_Alias:
         :param log_dir: log文件存放目录
         :param train_dir: 训练文件存放目录
         :param repeat_times: 重复次数，第 i 次用的种子为 seed + i*i
-        :return: 返回在 repeat_times 次测试中， loss 值到达 threshold 所需的平均时间
+        :return: 返回一个字典，'loss'：在 repeat_times 次测试中， loss 值到达 threshold 所需的平均时间； 'status'：hyperopt.STATUS_OK;
+            reuse_num：复用次数； 'separate_losses': 在 repeat_times 次测试中，到达 threshold 所需的时间列表
         """
         reuse_num, seed, topic_num, threshold, log_dir, train_dir, repeat_times = args
         reuse_num = int(reuse_num)
@@ -606,14 +608,16 @@ class Lda_MH_Alias:
         path = os.path.join(train_dir, p)
         log_likelihood = None
         ret = 0
+        separate_losses = []
         for i in range(repeat_times):
             random.seed(seed + i * i)
             t, l = self.train(reuse_num=reuse_num, topic_num=topic_num, threshold=threshold)
             ret += sum(t)
+            separate_losses.append(sum(t))
         # self.save_model('models/alias_' + str(reuse_num) + '_model')
         data = {p + '_time': t, p + '_like': log_likelihood}
         # sio.savemat(path, data) 在这里不存储log_likelihood的训练过程
-        return ret/repeat_times
+        return {'loss': ret/repeat_times, 'status': hyperopt.STATUS_OK, 'reuse_num': reuse_num, 'separate_losses': separate_losses}
 
 
     def run(self, reuse_list, percentage, seed, topic_num):
