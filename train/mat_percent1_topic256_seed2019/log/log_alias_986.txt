@@ -1,0 +1,7 @@
+iteration 1: consumed 12.39
+	Log likelihood:	-208422.2947148155
+iteration 1: consumed 12.54
+	Log likelihood:	-208294.28660973063
+iteration 1: consumed 12.42
+	Log likelihood:	-208760.43703737634
+get_wallclock with 56 reuse times

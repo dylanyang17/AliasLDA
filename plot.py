@@ -1,5 +1,6 @@
 # coding=utf-8
 import os
+import sys
 import pickle
 import scipy.io as sio
 from matplotlib import pyplot as plt
@@ -88,26 +89,44 @@ def plot():
     plt.show()
 
 
-def plot_tpe():
+def plot_tpe(separate):
     """
     TPE 的 plot, 用于读入 trials.pk, 绘制walltime-复用次数图像
+    param: separate: 是否将repeat_times>1的数据分开绘制，而不是以平均值绘制
     """
-    pk_dirs = [os.path.join('train', 'mat_percent10_topic256_seed2019')]
+    pk_dirs = [os.path.join('train', 'mat_percent1_topic256_seed2019')]
     for pk_dir in pk_dirs:
         with open(os.path.join(pk_dir, 'trials.pk'), 'rb') as f:
             trials = pickle.load(f)
 
-            reuse_times_list = trials.idxs_vals[1]['reuse']
-            wall_time_list = list(map(lambda x: x['loss'], trials.results))
-            data = list(zip(reuse_times_list, wall_time_list))
-            data.sort(key=lambda x: x[0])
-            reuse_times_list = list(map(lambda x: x[0], data))
-            wall_time_list = list(map(lambda x: x[1], data))
-            plt.figure()
-            plt.xlabel('reuse times')
-            plt.ylabel('wall-clock time')
-            plt.semilogx(reuse_times_list, wall_time_list, 'x--')
-            plt.show()
+            if not separate:
+                reuse_times_list = trials.idxs_vals[1]['reuse']
+                wall_time_list = list(map(lambda x: x['loss'], trials.results))
+                data = list(zip(reuse_times_list, wall_time_list))
+                data.sort(key=lambda x: x[0])
+                reuse_times_list = list(map(lambda x: x[0], data))
+                wall_time_list = list(map(lambda x: x[1], data))
+                plt.figure()
+                plt.xlabel('reuse times')
+                plt.ylabel('wall-clock time')
+                plt.semilogx(reuse_times_list, wall_time_list, 'x--')
+                plt.show()
+            else:
+                print(trials.results)
+                num = len(trials.results[0]['separate_losses'])
+                for i in range(num):
+                    reuse_times_list = trials.idxs_vals[1]['reuse']
+                    wall_time_list = list(map(lambda x: x['separate_losses'][i], trials.results))
+                    data = list(zip(reuse_times_list, wall_time_list))
+                    data.sort(key=lambda x: x[0])
+                    reuse_times_list = list(map(lambda x: x[0], data))
+                    wall_time_list = list(map(lambda x: x[1], data))
+                    plt.figure()
+                    plt.xlabel('reuse times')
+                    plt.ylabel('wall-clock time')
+                    plt.semilogx(reuse_times_list, wall_time_list, 'x--')
+                plt.show()
 
 
-plot_tpe()
+
+plot_tpe(True)

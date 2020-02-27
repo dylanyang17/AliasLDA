@@ -1,0 +1,2 @@
+Document number:	398	Word number:	27046	Vocabulary number:	4979
+get_wallclock with 2334 reuse times

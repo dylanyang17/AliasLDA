@@ -1,0 +1,6 @@
+iteration 1: consumed 7.17
+	Log likelihood:	-208273.52656804302
+iteration 1: consumed 7.13
+	Log likelihood:	-208342.91226877607
+iteration 1: consumed 7.17
+	Log likelihood:	-208241.17937839468
