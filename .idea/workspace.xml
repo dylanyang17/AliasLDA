@@ -4,6 +4,108 @@
     <list default="true" id="83bcb892-2a4f-423a-8bef-613cb34439de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testtest" beforeDir="false" afterPath="$PROJECT_DIR$/testtest" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1042.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1053.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1059.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1113.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1127.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1129.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_113.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1170.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1211.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1315.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1341.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1383.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1387.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1421.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_146.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1468.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1553.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1582.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1629.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1637.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1645.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_168.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_169.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1707.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1733.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1749.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1794.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1803.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_184.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1883.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1910.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1926.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1935.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_20.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_20.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2023.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2044.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2045.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2109.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2122.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2138.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_22.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_22.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_220.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_220.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2205.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2232.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2277.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2323.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_240.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2433.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2434.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2480.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2508.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2523.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_257.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2692.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2811.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_283.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_284.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2896.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_29.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2902.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2947.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_296.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_2970.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_304.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3167.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3351.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3463.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3509.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3525.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3673.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_375.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_379.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_389.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3911.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_3952.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_4019.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_4067.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_4086.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_434.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_448.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_471.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_524.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_527.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_571.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_593.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_599.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_609.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_621.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_696.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_72.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_76.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_789.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_792.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_839.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_853.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_881.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_934.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_976.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/settings.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/trials.pk" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/trials.pk" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/trials_old.pk" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
