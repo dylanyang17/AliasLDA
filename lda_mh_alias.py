@@ -103,10 +103,10 @@ class AliasSamples:
         A = []
         probTemp = self.prob * len(self.prob)  # debug: Should be len(self.prob) rather than num.
         for i, p in enumerate(probTemp):
-            if p > 1:
-                H.append((i, p))
-            elif p == 1:
+            if abs(p - 1) < 1e-10:
                 A.append((i, -1, p))
+            elif p > 1:
+                H.append((i, p))
             else:
                 L.append((i, p))
         while len(L) > 0:
@@ -114,7 +114,7 @@ class AliasSamples:
             pl = L.pop()
             A.append((pl[0], ph[0], pl[1]))
             p = ph[1] + pl[1] - 1
-            if abs(p - 1) < 0.00000000001:
+            if abs(p - 1) < 1e-10:
                 A.append((ph[0], -1, 1))
             elif p > 1:
                 H.append((ph[0], p))
@@ -705,4 +705,5 @@ model = Lda_MH_Alias()
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
 # TODO: pay attention to the threshold.
-model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=40)
+# model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=40)
+model.run([64],  percentage=10, seed=2019, topic_num=256)
