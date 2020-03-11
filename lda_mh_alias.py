@@ -103,18 +103,24 @@ class AliasSamples:
         A = []
         probTemp = self.prob * len(self.prob)  # debug: Should be len(self.prob) rather than num.
         for i, p in enumerate(probTemp):
-            if abs(p - 1) < 1e-10:
-                A.append((i, -1, p))
+            if abs(p - 1) < 1e-8:
+                A.append((i, -1, 1))
             elif p > 1:
                 H.append((i, p))
             else:
                 L.append((i, p))
         while len(L) > 0:
+            if len(H) == 0:
+                # 此时应该是出现了精度误差，考虑它其实为 1
+                print('Adjust', L)
+                p = L.pop()
+                A.append((p[0], -1, 1))
+                continue
             ph = H.pop()
             pl = L.pop()
             A.append((pl[0], ph[0], pl[1]))
             p = ph[1] + pl[1] - 1
-            if abs(p - 1) < 1e-10:
+            if abs(p - 1) < 1e-8:
                 A.append((ph[0], -1, 1))
             elif p > 1:
                 H.append((ph[0], p))
