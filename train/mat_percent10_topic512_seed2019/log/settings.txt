@@ -1,2 +1,2 @@
 Document number:	3986	Word number:	390074	Vocabulary number:	17524
-get_wallclock with 229 reuse times
+training model with 1 reuse times
