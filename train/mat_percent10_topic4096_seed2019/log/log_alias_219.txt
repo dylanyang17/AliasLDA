@@ -1,0 +1,2 @@
+iteration 1: consumed 466.79
+	Log likelihood:	-3584013.330825191

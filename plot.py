@@ -1,8 +1,11 @@
 # coding=utf-8
+import math
 import os
 import sys
 import pickle
+import numpy as np
 import scipy.io as sio
+from scipy.optimize import leastsq
 from matplotlib import pyplot as plt
 
 
@@ -89,6 +92,28 @@ def plot():
     plt.show()
 
 
+def quadratic(params, x):
+    """
+    对e^x的二次函数
+    :param params: 二次函数的参数
+    :param x: 横坐标值
+    :return:
+    """
+    a, b, c = params
+    return a * x * x + b * x + c
+
+
+def error(params, x, y):
+    """
+    误差函数
+    :param params: 二次函数的参数
+    :param x: 横坐标值
+    :param y: 实际的纵坐标值
+    :return:
+    """
+    return quadratic(params, x) - y
+
+
 def plot_tpe(separate):
     """
     TPE 的 plot, 用于读入 trials.pk, 绘制walltime-复用次数图像
@@ -106,10 +131,24 @@ def plot_tpe(separate):
                 data.sort(key=lambda x: x[0])
                 reuse_times_list = list(map(lambda x: x[0], data))
                 wall_time_list = list(map(lambda x: x[1], data))
+                log_reuse_times_list = list(map(lambda x: math.log10(x), reuse_times_list))  # 横坐标的对数值，用于拟合
                 plt.figure()
                 plt.xlabel('reuse times')
                 plt.ylabel('wall-clock time')
+                l = len(wall_time_list)
+                params = leastsq(error, np.array([2, -1, 1]), args=(np.array(log_reuse_times_list), np.array(wall_time_list)))
+                fit = []
+                err = 0  # 计算均方根误差
+                for ind, reuse_time in enumerate(reuse_times_list):
+                    y = quadratic(params=params[0], x=math.log10(reuse_time))
+                    fit.append(y)
+                    err += (y-wall_time_list[ind]) * (y-wall_time_list[ind])
+                err = math.sqrt(err/l)
                 plt.semilogx(reuse_times_list, wall_time_list, 'x--')
+                plt.semilogx(reuse_times_list, fit, 'x-')
+                best_reuse_time = 10**(-params[0][1] / (2*params[0][0]))
+                print(best_reuse_time)
+                print(err)
             else:
                 print(trials.results)
                 num = len(trials.results[0]['separate_losses'])
@@ -128,4 +167,5 @@ def plot_tpe(separate):
             plt.show()
 
 
-plot_tpe(False)
+if __name__ == '__main__':
+    plot_tpe(False)
