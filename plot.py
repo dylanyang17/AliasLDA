@@ -92,10 +92,21 @@ def plot():
     plt.show()
 
 
+def linear(params, x):
+    """
+    对 x 的一次函数，y = kx + b
+    :param params: [k, b]
+    :param x:
+    :return:
+    """
+    k, b = params
+    return k * x + b
+
+
 def quadratic(params, x):
     """
-    对e^x的二次函数
-    :param params: 二次函数的参数
+    对 x 的二次函数, y = ax^2 + bx + c
+    :param params: 二次函数的参数, [a, b, c]
     :param x: 横坐标值
     :return:
     """
@@ -103,23 +114,12 @@ def quadratic(params, x):
     return a * x * x + b * x + c
 
 
-def error(params, x, y):
-    """
-    误差函数
-    :param params: 二次函数的参数
-    :param x: 横坐标值
-    :param y: 实际的纵坐标值
-    :return:
-    """
-    return quadratic(params, x) - y
-
-
-def plot_tpe(separate):
+def plot_tpe(pk_dirs, separate):
     """
     TPE 的 plot, 用于读入 trials.pk, 绘制walltime-复用次数图像
-    param: separate: 是否将repeat_times>1的数据分开绘制，而不是以平均值绘制
+    :param pk_dirs: 一个列表，其中每个元素为 trails.pk 所在的某个目录
+    :param separate: 是否将repeat_times>1的数据分开绘制，而不是以平均值绘制
     """
-    pk_dirs = [os.path.join('train', 'mat_percent10_topic64_seed2019')]
     for pk_dir in pk_dirs:
         with open(os.path.join(pk_dir, 'trials.pk'), 'rb') as f:
             trials = pickle.load(f)
@@ -136,7 +136,7 @@ def plot_tpe(separate):
                 plt.xlabel('reuse times')
                 plt.ylabel('wall-clock time')
                 l = len(wall_time_list)
-                params = leastsq(error, np.array([2, -1, 1]), args=(np.array(log_reuse_times_list), np.array(wall_time_list)))
+                params = leastsq(lambda params, x, y: quadratic(params, x) - y, np.array([2, -1, 1]), args=(np.array(log_reuse_times_list), np.array(wall_time_list)))
                 fit = []
                 err = 0  # 计算均方根误差
                 for ind, reuse_time in enumerate(reuse_times_list):
@@ -167,5 +167,28 @@ def plot_tpe(separate):
             plt.show()
 
 
+def plot_relationship():
+    """
+    用于绘制主题数和最优复用次数关系的函数
+    """
+    topics = [64, 128, 256, 512, 1024, 2048]
+    best_reuse_times = [72.12479, 98.66283, 154.11310, 288.14101, 477.81672, 702.58120]
+    plt.plot(topics, best_reuse_times, 'x--')
+
+    # 拟合
+    params = leastsq(lambda params, x, y: linear(params, x) - y, np.array([1, 0]),
+                     args=(np.array(topics), np.array(best_reuse_times)))
+    print(params)
+    print(linear(params[0], topics[4]))
+    fit = list(map(linear, [params[0] for _ in range(len(topics))], topics))
+    plt.plot(topics, fit, 'x-')
+
+    for i in range(len(topics)):
+        text = '(%d, %.3f)' % (topics[i], best_reuse_times[i])
+        plt.text(topics[i]-100, best_reuse_times[i]+30, text)
+    plt.show()
+
+
 if __name__ == '__main__':
-    plot_tpe(False)
+    # plot_tpe([os.path.join('train', 'mat_percent10_topic4096_seed2019')], False)
+    plot_relationship()
