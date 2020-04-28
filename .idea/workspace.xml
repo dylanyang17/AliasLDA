@@ -2,29 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="83bcb892-2a4f-423a-8bef-613cb34439de" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic1024_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic1024_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic1024_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic1024_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic128_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic128_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic128_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic128_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic2048_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic2048_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic2048_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic256_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic4096_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic4096_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic4096_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic4096_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic512_seed2019/log/settings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic64_seed2019/alias_1.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic64_seed2019/log/log_alias_1.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/train/mat_percent10_topic64_seed2019/log/settings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/train/mat_percent10_topic64_seed2019/log/settings.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,22 +156,22 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="921" y="255" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1587457753999" />
-    <state width="1364" height="158" key="GridCell.Tab.0.bottom" timestamp="1587467382709">
+    <state width="1364" height="158" key="GridCell.Tab.0.bottom" timestamp="1587467784810">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1364" height="158" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587467382709" />
-    <state width="1364" height="158" key="GridCell.Tab.0.center" timestamp="1587467382708">
+    <state width="1364" height="158" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1587467784810" />
+    <state width="1364" height="158" key="GridCell.Tab.0.center" timestamp="1587467784810">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1364" height="158" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1587467382708" />
-    <state width="1364" height="158" key="GridCell.Tab.0.left" timestamp="1587467382708">
+    <state width="1364" height="158" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1587467784810" />
+    <state width="1364" height="158" key="GridCell.Tab.0.left" timestamp="1587467784810">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1364" height="158" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1587467382708" />
-    <state width="1364" height="158" key="GridCell.Tab.0.right" timestamp="1587467382709">
+    <state width="1364" height="158" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1587467784810" />
+    <state width="1364" height="158" key="GridCell.Tab.0.right" timestamp="1587467784810">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1364" height="158" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1587467382709" />
+    <state width="1364" height="158" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1587467784810" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
