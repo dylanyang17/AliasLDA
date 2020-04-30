@@ -626,7 +626,7 @@ class Lda_MH_Alias:
         return {'loss': ret/repeat_times, 'status': hyperopt.STATUS_OK, 'reuse_num': reuse_num, 'separate_losses': separate_losses}
 
 
-    def run(self, reuse_list, percentage, seed, topic_num):
+    def run(self, dataset, reuse_list, percentage, seed, topic_num):
         """Run the training of a series of lda models with different numbers of reuse.
         The performance of each lda model is evaluated with log likelihood and
         consumed time. The results are stored in a mat file.
@@ -651,7 +651,7 @@ class Lda_MH_Alias:
             os.makedirs(log_dir)
         global log_path
         log_path = os.path.join(log_dir, 'settings.txt')
-        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
+        self.load_data_formal(filename='data/docword.%s.txt/docword.%s.txt' % (dataset, dataset), percentage=percentage)
         for i in reuse_list:
             random.seed(seed)  # fix the seed.
             debug('training model with %d reuse times' % i)
@@ -663,9 +663,10 @@ class Lda_MH_Alias:
             data = {p + '_time': t, p + '_like': log_likelihood}
             sio.savemat(path, data)
 
-    def run_auto(self, percentage, seed, topic_num, threshold, repeat_times, max_evals):
+    def run_auto(self, dataset, percentage, seed, topic_num, threshold, repeat_times, max_evals):
         """
         Run model without reuse_list, but with the selection algorithm Auto-WEKA with TPE.
+        :param dataset: 数据集名称，例如 enron, nips 等
         :param percentage: 只使用数据的percentage%部分
         :param seed: 用于固定随机种子
         :param topic_num: 主题数
@@ -674,7 +675,7 @@ class Lda_MH_Alias:
         :param max_evals: 最大迭代次数
         :return: 
         """
-        train_dir = os.path.join('train', 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
+        train_dir = os.path.join('train', dataset, 'mat_percent%d_topic%d_seed%d' % (percentage, topic_num, seed))
         if not os.path.exists(train_dir):
             os.makedirs(train_dir)
         log_dir = os.path.join(train_dir, 'log')
@@ -682,7 +683,7 @@ class Lda_MH_Alias:
             os.makedirs(log_dir)
         global log_path
         log_path = os.path.join(log_dir, 'settings.txt')
-        self.load_data_formal(filename='data/docword.enron.txt/docword.enron.txt', percentage=percentage)
+        self.load_data_formal(filename='data/docword.%s.txt/docword.%s.txt' % (dataset, dataset), percentage=percentage)
         trials = Trials()
         best = fmin(fn=self.get_wallclock,
                     #space=[hp.quniform('reuse', 16, 4096, 1), seed, topic_num, threshold,
@@ -710,10 +711,7 @@ model = Lda_MH_Alias()
 # model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
-model.run_auto(percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=128, threshold=-2798212, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2767872, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=512, threshold=-2746096, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=1024, threshold=-2760295, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=2048, threshold=-2795029, repeat_times=3, max_evals=40)
-model.run_auto(percentage=10, seed=2019, topic_num=4096, threshold=-2833301, repeat_times=3, max_evals=40)
+model.run('nips', [1], percentage=50, seed=2019, topic_num=256)
+
+# TODO:Threshold
+# model.run_auto(dataset='nips', percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)

@@ -1,1 +1,3 @@
 https://archive.ics.uci.edu/ml/index.php
+
+http://archive.ics.uci.edu/ml/machine-learning-databases/bag-of-words/

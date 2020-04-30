@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="83bcb892-2a4f-423a-8bef-613cb34439de" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data_url.txt" beforeDir="false" afterPath="$PROJECT_DIR$/data_url.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lda_mh_alias.py" beforeDir="false" afterPath="$PROJECT_DIR$/lda_mh_alias.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -33,7 +34,7 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
-  <component name="RunManager" selected="Python.plot">
+  <component name="RunManager" selected="Python.lda_mh_alias">
     <configuration name="lda_mh_alias" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="采样复杂度优化" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -120,9 +121,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.lda_mh_alias" />
         <item itemvalue="Python.plot" />
         <item itemvalue="Python.test_hyperopt" />
-        <item itemvalue="Python.lda_mh_alias" />
         <item itemvalue="Python.test" />
       </list>
     </recent_temporary>
