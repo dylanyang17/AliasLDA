@@ -710,6 +710,10 @@ model = Lda_MH_Alias()
 # model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
 # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
-# TODO: pay attention to the threshold.
-# model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2800000, repeat_times=3, max_evals=40)
-model.run([64],  percentage=10, seed=2019, topic_num=256)
+model.run_auto(percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=128, threshold=-2798212, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=256, threshold=-2767872, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=512, threshold=-2746096, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=1024, threshold=-2760295, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=2048, threshold=-2795029, repeat_times=3, max_evals=40)
+model.run_auto(percentage=10, seed=2019, topic_num=4096, threshold=-2833301, repeat_times=3, max_evals=40)
