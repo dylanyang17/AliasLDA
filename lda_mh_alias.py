@@ -159,6 +159,7 @@ class Lda_MH_Alias:
         self.docs = []  # 每个单词对应的文档的标号
         self.vocabulary = []  # 标号对应的单词字符串
         self.topics = []  # 每个单词对应的主题的标号
+        self.word_num_per_doc = []  # 每篇文档单词数
         self.doc_num = 0  # 总文档数
         self.word_num = 0  # 总单词数（重复出现计多次）
         self.voc_num = 0  # 总词汇数（重复出现计一次）
@@ -261,12 +262,14 @@ class Lda_MH_Alias:
             self.word_num = 0
             # self.vocabulary = range(0, self.voc_num)
             self.doc_num = int(self.doc_num * percentage / 100)
+            self.word_num_per_doc = [0] * self.doc_num
             for line in f:
                 items = list(map(int, line.strip().split(' ')))
                 if items[0] > self.doc_num:
                     break
                 doc = items[0] - 1
                 word = items[1] - 1
+                self.word_num_per_doc[doc] += items[2]
                 if word not in self.vocabulary:
                     self.vocabulary.append(word)
                     self.words.extend([len(self.vocabulary) - 1] * items[2])
@@ -705,13 +708,15 @@ def debug(s):
     with open(log_path, 'a') as f:
         print(s, file=f)
 
-# 注意percentage必须是整数
-model = Lda_MH_Alias()
-# model.run([8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192], percentage=10, seed=2019, topic_num=256)
-# model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
-# model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
-model.run('nips', [1], percentage=50, seed=2019, topic_num=256)
+if __name__ == '__main__':
+    # 注意percentage必须是整数
+    model = Lda_MH_Alias()
+    # model.run([8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192], percentage=10, seed=2019, topic_num=256)
+    # model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
+    # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
-# TODO:Threshold
-# model.run_auto(dataset='nips', percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)
+    model.run('nips', [1], percentage=50, seed=2019, topic_num=256)
+
+    # TODO:Threshold
+    # model.run_auto(dataset='nips', percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)

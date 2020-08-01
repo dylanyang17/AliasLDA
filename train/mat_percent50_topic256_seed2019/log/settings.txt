@@ -1,2 +1,4 @@
 Document number:	750	Word number:	947511	Vocabulary number:	11622
 training model with 1 reuse times
+Document number:	750	Word number:	947511	Vocabulary number:	11622
+training model with 1 reuse times

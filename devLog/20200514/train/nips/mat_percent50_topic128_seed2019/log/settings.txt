@@ -1,0 +1,2 @@
+Document number:	750	Word number:	947511	Vocabulary number:	11622
+get_wallclock with 90 reuse times

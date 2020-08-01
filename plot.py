@@ -171,24 +171,28 @@ def plot_relationship():
     """
     用于绘制主题数和最优复用次数关系的函数
     """
+    # nips
     topics = [64, 128, 256, 512, 1024, 2048]
-    best_reuse_times = [72.12479, 98.66283, 154.11310, 288.14101, 477.81672, 702.58120]
+    best_reuse_times = [82.51868, 101.30196, 138.11952, 194.05865, 212, 383.175]
+   # enron
+    # topics = [64, 128, 256, 512, 1024, 2048]
+    # best_reuse_times = [72.12479, 98.66283, 154.11310, 288.14101, 477.81672, 702.58120]
     plt.plot(topics, best_reuse_times, 'x--')
 
     # 拟合
     params = leastsq(lambda params, x, y: linear(params, x) - y, np.array([1, 0]),
                      args=(np.array(topics), np.array(best_reuse_times)))
     print(params)
-    print(linear(params[0], topics[4]))
+    # print(linear(params[0], topics[4]))
     fit = list(map(linear, [params[0] for _ in range(len(topics))], topics))
     plt.plot(topics, fit, 'x-')
 
     for i in range(len(topics)):
         text = '(%d, %.3f)' % (topics[i], best_reuse_times[i])
-        plt.text(topics[i]-100, best_reuse_times[i]+30, text)
+        plt.text(topics[i]-200, best_reuse_times[i]+20, text)
     plt.show()
 
 
 if __name__ == '__main__':
-    # plot_tpe([os.path.join('train', 'mat_percent10_topic4096_seed2019')], False)
+    # plot_tpe([os.path.join('train/nips', 'mat_percent50_topic2048_seed2019')], False)
     plot_relationship()
