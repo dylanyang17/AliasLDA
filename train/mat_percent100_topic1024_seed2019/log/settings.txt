@@ -1,0 +1,2 @@
+Document number:	3430	Word number:	467714	Vocabulary number:	6906
+training model with 1 reuse times

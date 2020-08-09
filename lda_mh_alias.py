@@ -705,8 +705,9 @@ log_path = ''
 def debug(s):
     global log_path
     print(s)
-    with open(log_path, 'a') as f:
-        print(s, file=f)
+    if log_path and log_path != '':
+        with open(log_path, 'a') as f:
+            print(s, file=f)
 
 
 if __name__ == '__main__':
@@ -716,7 +717,13 @@ if __name__ == '__main__':
     # model.run([138, 148, 158, 168, 178, 188, 198, 208, 218, 228, 238, 248, 268, 278, 288, 300, 320, 340, 360, 380, 400, 420, 440, 460, 480], percentage=10, seed=8374)
     # model.run([724, 824, 924, 1024, 1124, 1224, 1324, 1424])
 
-    model.run('nips', [1], percentage=50, seed=2019, topic_num=256)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=64)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=128)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=256)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=512)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=1024)
+    model.run('kos', [1], percentage=100, seed=2019, topic_num=2048)
+
 
     # TODO:Threshold
     # model.run_auto(dataset='nips', percentage=10, seed=2019, topic_num=64, threshold=-2872710, repeat_times=3, max_evals=40)

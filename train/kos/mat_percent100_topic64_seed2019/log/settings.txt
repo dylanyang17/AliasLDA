@@ -1,0 +1,2 @@
+Document number:	3430	Word number:	467714	Vocabulary number:	6906
+get_wallclock with 34 reuse times

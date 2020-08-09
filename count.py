@@ -11,4 +11,4 @@ def count_words_per_doc(dataset, percentage):
 
 
 if __name__ == '__main__':
-    count_words_per_doc('nips', 50)
+    count_words_per_doc('kos', 100)

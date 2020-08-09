@@ -24,8 +24,8 @@ def get_reuse_times(name):
     return int(name[name.find('_') + 1:])
 
 
-def plot():
-    mat_path = os.path.join('train', 'mat_percent10_topic1024_seed2019')
+def plot_mat():
+    mat_path = os.path.join('train', 'mat_percent100_topic128_seed2019')
     # mat_name = ['alias_724', 'alias_824', 'alias_924', 'alias_1024', 'alias_1124', 'alias_1224', 'alias_1324', 'alias_1424']
     # mat_name = ['alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_128', 'alias_256', 'alias_512', 'alias_724','alias_824', 'alias_1024', 'alias_2048', 'alias_4096']
     # mat_name = ['alias_4', 'alias_8', 'alias_16', 'alias_32', 'alias_64', 'alias_88', 'alias_98', 'alias_108', 'alias_118', 'alias_123',
@@ -195,4 +195,5 @@ def plot_relationship():
 
 if __name__ == '__main__':
     # plot_tpe([os.path.join('train/nips', 'mat_percent50_topic2048_seed2019')], False)
-    plot_relationship()
+    # plot_relationship()
+    plot_mat()
